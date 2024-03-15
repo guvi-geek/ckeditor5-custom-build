@@ -7,19 +7,27 @@ import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 
 import { Alignment } from '@ckeditor/ckeditor5-alignment';
 import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
-import { Bold, Italic, Underline } from '@ckeditor/ckeditor5-basic-styles';
+import {
+	Bold,
+	Code,
+	Italic,
+	Strikethrough,
+	Subscript,
+	Superscript,
+	Underline
+} from '@ckeditor/ckeditor5-basic-styles';
 import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
-import { CKBox } from '@ckeditor/ckeditor5-ckbox';
 import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
+import { CodeBlock } from '@ckeditor/ckeditor5-code-block';
 import type { EditorConfig } from '@ckeditor/ckeditor5-core';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
 import { FindAndReplace } from '@ckeditor/ckeditor5-find-and-replace';
-import { FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font';
+import { FontColor, FontSize } from '@ckeditor/ckeditor5-font';
 import { Heading } from '@ckeditor/ckeditor5-heading';
 import { Highlight } from '@ckeditor/ckeditor5-highlight';
 import { HorizontalLine } from '@ckeditor/ckeditor5-horizontal-line';
 import { HtmlEmbed } from '@ckeditor/ckeditor5-html-embed';
-import { GeneralHtmlSupport, HtmlComment } from '@ckeditor/ckeditor5-html-support';
+import { DataFilter, GeneralHtmlSupport } from '@ckeditor/ckeditor5-html-support';
 import {
 	Image,
 	ImageCaption,
@@ -27,43 +35,51 @@ import {
 	ImageResize,
 	ImageStyle,
 	ImageToolbar,
-	ImageUpload,
-	PictureEditing
+	ImageUpload
 } from '@ckeditor/ckeditor5-image';
-import { Indent } from '@ckeditor/ckeditor5-indent';
+import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
 import { Link } from '@ckeditor/ckeditor5-link';
 import { List } from '@ckeditor/ckeditor5-list';
 import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
+import { PageBreak } from '@ckeditor/ckeditor5-page-break';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
-import { Table, TableToolbar } from '@ckeditor/ckeditor5-table';
+import { RemoveFormat } from '@ckeditor/ckeditor5-remove-format';
+import { SelectAll } from '@ckeditor/ckeditor5-select-all';
+import { ShowBlocks } from '@ckeditor/ckeditor5-show-blocks';
+import {
+	SpecialCharacters,
+	SpecialCharactersArrows,
+	SpecialCharactersCurrency,
+	SpecialCharactersMathematical
+} from '@ckeditor/ckeditor5-special-characters';
+import { Table, TableColumnResize, TableToolbar } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
-import { AccessibilityHelp } from '@ckeditor/ckeditor5-ui';
 import { Undo } from '@ckeditor/ckeditor5-undo';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
+import MathType from '@wiris/mathtype-ckeditor5';
 
 // You can read more about extending the build with additional plugins in the "Installing plugins" guide.
 // See https://ckeditor.com/docs/ckeditor5/latest/installation/plugins/installing-plugins.html for details.
 
 class Editor extends ClassicEditor {
 	public static override builtinPlugins = [
-		AccessibilityHelp,
 		Alignment,
 		Autoformat,
 		BlockQuote,
 		Bold,
-		CKBox,
 		CloudServices,
+		Code,
+		CodeBlock,
+		DataFilter,
 		Essentials,
 		FindAndReplace,
 		FontColor,
-		FontFamily,
 		FontSize,
 		GeneralHtmlSupport,
 		Heading,
 		Highlight,
 		HorizontalLine,
-		HtmlComment,
 		HtmlEmbed,
 		Image,
 		ImageCaption,
@@ -73,14 +89,27 @@ class Editor extends ClassicEditor {
 		ImageToolbar,
 		ImageUpload,
 		Indent,
+		IndentBlock,
 		Italic,
 		Link,
 		List,
+		MathType,
 		MediaEmbed,
+		PageBreak,
 		Paragraph,
 		PasteFromOffice,
-		PictureEditing,
+		RemoveFormat,
+		SelectAll,
+		ShowBlocks,
+		SpecialCharacters,
+		SpecialCharactersArrows,
+		SpecialCharactersCurrency,
+		SpecialCharactersMathematical,
+		Strikethrough,
+		Subscript,
+		Superscript,
 		Table,
+		TableColumnResize,
 		TableToolbar,
 		TextTransformation,
 		Underline,
@@ -92,12 +121,17 @@ class Editor extends ClassicEditor {
 		toolbar: {
 			items: [
 				'heading',
+				'codeBlock',
+				'code',
 				'|',
-				'fontColor',
-				'fontSize',
+				'MathType',
+				'ChemType',
+				'specialCharacters',
 				'bold',
 				'italic',
 				'underline',
+				'fontColor',
+				'fontSize',
 				'link',
 				'bulletedList',
 				'numberedList',
@@ -111,11 +145,15 @@ class Editor extends ClassicEditor {
 				'undo',
 				'redo',
 				'horizontalLine',
-				'highlight',
-				'imageInsert',
 				'htmlEmbed',
-				'alignment',
-				'findAndReplace'
+				'imageInsert',
+				'removeFormat',
+				'selectAll',
+				'strikethrough',
+				'superscript',
+				'subscript',
+				'highlight',
+				'alignment'
 			]
 		},
 		language: 'en',
